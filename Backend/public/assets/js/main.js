@@ -155,7 +155,7 @@ $(document).ready(function() {
             var submit = {
                 "id": id,
                 "content": {
-                    "tag": $(`#${id}_solve_tag`).text(),
+                    "solve_tag": $(`#${id}_solve_tag`).text(),
                     "solve": $(`#${id}_solve`).prop("checked") ? 1 : 0 
                 }
             }
