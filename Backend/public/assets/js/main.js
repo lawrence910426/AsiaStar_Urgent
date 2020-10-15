@@ -1,3 +1,68 @@
+function gen(row) {
+    return `<div class="row">
+    <div class="col">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><strong>貨主</strong></th>
+                        <th><strong>發問人</strong></th>
+                        <th><strong>單號</strong></th>
+                        <th><strong>料號</strong></th>
+                        <th><strong>須追蹤問題</strong></th>
+                        <th><strong>發問時間</strong></th>
+                        <th><strong>配送司機</strong></th>
+                        <th><strong>配送車號</strong></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>維達</td>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[吳邦寧]">${row.questioner_name}</textarea></td>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5487580]">${row.recipt_id}</textarea></td>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5809487]">${row.product_id}</textarea><label id="product_name" style="width: 100%;">品名：???</label></td>
+                        <td><textarea id="question" class="asia_disable" style="width: 100%;height: 150px;" placeholder="[Why is it so late?]">${row.question}</textarea>
+                            <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary asia_disable" id="submit_question" type="button">發問</button></div>
+                        </td>
+                        <td><label id="question_tag">${row.question_tag}</label></td>
+                        <td><label id="name">???</label></td>
+                        <td><label id="car_id">???</label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th><strong>回覆人</strong><br /></th>
+                        <th><strong>回覆情形</strong><br /></th>
+                        <th><strong>回覆時間</strong><br /></th>
+                        <th><strong>解決否</strong><br /></th>
+                        <th><strong>解決時間</strong><br /></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><label></label><textarea id="replyer_name" class="weida_disable" style="height: 30px;width: 100%;" placeholder="[吳邦寧]"></textarea></td>
+                        <td><textarea id="reply" class="weida_disable" style="width: 100%;height: 150px;" placeholder="[Replied]"></textarea>
+                            <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary weida_disable" id="submit_answer" type="button">回答</button></div>
+                        </td>
+                        <td><label id="reply_tag">???</label></td>
+                        <td>
+                            <div class="form-check"><input type="checkbox" class="form-check-input weida_disable" id="formCheck-1" /><label class="form-check-label" for="formCheck-1">是否解決</label></div>
+                        </td>
+                        <td><label>???</label></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<hr />
+`
+}
+
 $(document).ready(function() {
     let githubURL = new URL(window.location.href);
     let params = githubURL.searchParams;
@@ -74,4 +139,10 @@ $(document).ready(function() {
         setTimeout(update_tag, 500)
     }
     update_tag();
+    
+    $.post( "/get_questions", function(data) {
+        for(var i in data) {
+            $("#history").append(gen(data[i]))
+        }
+    });
 })
