@@ -115,6 +115,11 @@ $(document).ready(function() {
     
     $.post( "/get_questions", function(data) {
         for(var i in data) {
+            var fields = ["recipt_id", "product_id"]
+            var submit = {}
+            for(var item in fields) 
+                submit[fields[item]] = data[i][fields[item]]
+        
             $.post( "/query_car", submit, function(ret) {
                 if(ret.length == 0) {
                     data[i]["name"] = "???"
