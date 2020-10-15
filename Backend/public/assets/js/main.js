@@ -100,9 +100,9 @@ $(document).ready(function() {
         }
         $.post( "/query_car", submit, function(data) {
             if(data.length == 0) {
-                $('#name').val("???")
-                $('#car_id').val("???")
-                $("#product_name").val(`品名：?`)
+                $('#name').text("???")
+                $('#car_id').text("???")
+                $("#product_name").text(`品名：?`)
             } else {
                 $('#name').text(data[0].name)
                 $('#car_id').text(data[0].car_id)
