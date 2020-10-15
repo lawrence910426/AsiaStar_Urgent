@@ -112,7 +112,7 @@ $(document).ready(function() {
     $.post( "/get_questions", function(data) {
         for(var i in data) {
             $("#history").append(gen(data[i]))
-            $(`${row.id}_solve`).prop('checked', data[i].solve == 1);
+            $(`${data[i].id}_solve`).prop('checked', data[i].solve == 1);
         }
         hook();
     });
