@@ -145,7 +145,7 @@ $(document).ready(function() {
                     "reply": $(`#${id}_reply`).val()
                 }
             }
-            $.post("/answer_problem", JSON.stringify(submit), function(data) {
+            $.post("/answer_problem", { "content": JSON.stringify(submit) }, function(data) {
                 window.location.reload();
             });
         })
@@ -159,7 +159,7 @@ $(document).ready(function() {
                     "solve": $(`#${id}_solve`).prop("checked") ? 1 : 0 
                 }
             }
-            $.post("/solve_problem", JSON.stringify(submit), function(data) {
+            $.post("/solve_problem", { "content": JSON.stringify(submit) }, function(data) {
                 window.location.reload();
             });
         })
