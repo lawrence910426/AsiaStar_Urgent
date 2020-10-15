@@ -142,11 +142,11 @@ $(document).ready(function() {
                 "content": {
                     "question_tag": $(`#${id}_reply_tag`).text(),
                     "replyer_name": $(`${id}_replyer_name`).text(),
-                    "reply": $(`${id}_reply`).text()
+                    "reply": $(`#${id}_reply`).text()
                 }
             }
             $.post("/answer_problem", submit, function(data) {
-                window.location.reload();
+                //window.location.reload();
             });
         })
         
@@ -160,7 +160,7 @@ $(document).ready(function() {
                 }
             }
             $.post("/solve_problem", submit, function(data) {
-                window.location.reload();
+                //window.location.reload();
             });
         })
     }
