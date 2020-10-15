@@ -141,8 +141,8 @@ $(document).ready(function() {
                 "id": id,
                 "content": {
                     "question_tag": $(`#${id}_reply_tag`).text(),
-                    "replyer_name": $(`${id}_replyer_name`).text(),
-                    "reply": $(`#${id}_reply`).text()
+                    "replyer_name": $(`${id}_replyer_name`).val(),
+                    "reply": $(`#${id}_reply`).val()
                 }
             }
             $.post("/answer_problem", submit, function(data) {
