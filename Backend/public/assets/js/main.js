@@ -104,9 +104,9 @@ $(document).ready(function() {
                 $('#car_id').val("???")
                 $("#product_name").val(`品名：?`)
             } else {
-                $('#name').val(data[0].name)
-                $('#car_id').val(data[0].car_id)
-                $("#product_name").val(`品名：${data[0].product_name}`)
+                $('#name').text(data[0].name)
+                $('#car_id').text(data[0].car_id)
+                $("#product_name").text(`品名：${data[0].product_name}`)
             }
         });
         
