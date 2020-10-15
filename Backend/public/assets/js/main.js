@@ -1,3 +1,7 @@
+let githubURL = new URL(window.location.href);
+let params = githubURL.searchParams;
+let type = params.get('q'); 
+
 function gen(row) {
     return `
 <div class="card" style="margin-top:100px">
@@ -51,11 +55,11 @@ function gen(row) {
                         <td><textarea class="weida_disable" style="width: 100%;height: 150px;" placeholder="[Replied]" id="${row.id}_reply">${row.reply == undefined ? "" : row.reply}</textarea>
                             <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary weida_disable submit_answer" self_id="${row.id}" type="button">回答</button></div>
                         </td>
-                        <td><label id="${row.id}_reply_tag" ${row.reply_tag == undefined ? 'class="reply_tag"' : ''}>${row.reply_tag == undefined ? "" : row.reply_tag}</label></td>
+                        <td><label id="${row.id}_reply_tag" ${row.reply_tag == undefined ? 'class="reply_tag"' : ''}>${row.reply_tag == undefined && type == "asia" ? "???" : row.reply_tag}</label></td>
                         <td>
                             <div class="form-check"><input id="${row.id}_solve" type="checkbox" class="form-check-input weida_disable solve" self_id="${row.id}"/><label class="form-check-label" for="${row.id}_solve">是否解決</label></div>
                         </td>
-                        <td><label ${row.solve_tag == undefined ? 'class="solve_tag"' : ''} id="${row.id}_solve_tag">${row.solve_tag == undefined ? "" : row.solve_tag}</label></td>
+                        <td><label ${row.solve_tag == undefined && type == "asia" ? 'class="solve_tag"' : ''} id="${row.id}_solve_tag">${row.solve_tag == undefined ? "???" : row.solve_tag}</label></td>
                     </tr>
                 </tbody>
             </table>
@@ -124,9 +128,6 @@ $(document).ready(function() {
         }
         update_tag();
 
-        let githubURL = new URL(window.location.href);
-        let params = githubURL.searchParams;
-        let type = params.get('q'); 
         if(type == "weida") {
             $(".asia_star_only").css("display", "none")
             $(".weida_disable").attr('disabled','disabled');
