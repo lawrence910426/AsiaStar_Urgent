@@ -1,4 +1,4 @@
-module.exports = ((Sequelize, Model, DataTypes, sequelize, option = { force: true }) => {
+module.exports = ((Sequelize, Model, DataTypes, sequelize, option = { force: false }) => {
     class car extends Model { }
     car.init({
         car_id: { type: Sequelize.STRING },

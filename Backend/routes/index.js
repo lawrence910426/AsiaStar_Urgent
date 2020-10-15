@@ -21,19 +21,21 @@ router.post('/query_car', async function(req, res) {
 });
 
 router.post('/answer_problem', async function(req, res) {
+	var param = JSON.parse(req.body.content)
 	await db.question.update(
-		  req.body.content,
-		  { where: { id: req.body.id } }
+		  param.content,
+		  { where: { id: param.id } }
 	)
 	res.send("OK");
 });
 
 router.post('/solve_problem', async function(req, res) {
-	var content = req.body.content;
-	if(!content.solve) content.solve_tag = null;
+	var param = JSON.parse(req.body.content);
+	if(!param.content.solve) param.content.solve_tag = null;
+	console.log(param)
 	await db.question.update(
-		content,
-		{ where: { id: req.body.id } }
+		param.content,
+		{ where: { id: param.id } }
 	)
 	res.send("OK");
 });
