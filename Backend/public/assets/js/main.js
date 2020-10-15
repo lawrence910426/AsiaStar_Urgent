@@ -18,11 +18,11 @@ function gen(row) {
                 <tbody>
                     <tr>
                         <td>維達</td>
-                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[吳邦寧]">${row.questioner_name}</textarea></td>
-                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5487580]">${row.recipt_id}</textarea></td>
-                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5809487]">${row.product_id}</textarea><label id="product_name" style="width: 100%;">品名：???</label></td>
-                        <td><textarea id="question" class="asia_disable" style="width: 100%;height: 150px;" placeholder="[Why is it so late?]">${row.question}</textarea>
-                            <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary asia_disable" id="submit_question" type="button">發問</button></div>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[吳邦寧]" disabled="disabled">${row.questioner_name}</textarea></td>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5487580]" disabled="disabled">${row.recipt_id}</textarea></td>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5809487]" disabled="disabled">${row.product_id}</textarea><label id="product_name" style="width: 100%;">品名：???</label></td>
+                        <td><textarea id="question" class="asia_disable" style="width: 100%;height: 150px;" placeholder="[Why is it so late?]" disabled="disabled">${row.question}</textarea>
+                            <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary asia_disable" id="submit_question" type="button" disabled="disabled">發問</button></div>
                         </td>
                         <td><label id="question_tag">${row.question_tag}</label></td>
                         <td><label id="name">???</label></td>
