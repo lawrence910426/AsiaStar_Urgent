@@ -51,11 +51,11 @@ function gen(row) {
                         <td><textarea class="weida_disable" style="width: 100%;height: 150px;" placeholder="[Replied]" id="${row.id}_reply">${row.reply == undefined ? "" : row.reply}</textarea>
                             <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary weida_disable submit_answer" self_id="${row.id}" type="button">回答</button></div>
                         </td>
-                        <td><label id="${row.id}_reply_tag" class="reply_tag">???</label></td>
+                        <td><label id="${row.id}_reply_tag" ${row.reply_tag == undefined ? 'class="reply_tag"' : ''}>${row.reply_tag == undefined ? "" : row.reply_tag}</label></td>
                         <td>
                             <div class="form-check"><input id="${row.id}_solve" type="checkbox" class="form-check-input weida_disable solve" self_id="${row.id}"/><label class="form-check-label" for="${row.id}_solve">是否解決</label></div>
                         </td>
-                        <td><label class="solve_tag" id="${row.id}_solve_tag">${row.solve_tag}</label></td>
+                        <td><label ${row.solve_tag == undefined ? 'class="solve_tag"' : ''} id="${row.id}_solve_tag">${row.solve_tag == undefined ? "" : row.solve_tag}</label></td>
                     </tr>
                 </tbody>
             </table>
@@ -112,7 +112,7 @@ $(document).ready(function() {
     $.post( "/get_questions", function(data) {
         for(var i in data) {
             $("#history").append(gen(data[i]))
-            $(`${data[i].id}_solve`).prop('checked', data[i].solve == 1);
+            $(`${data[i].id}_solve`).prop('checked', data[i].solve);
         }
         hook();
     });
