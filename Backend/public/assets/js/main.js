@@ -141,7 +141,7 @@ $(document).ready(function() {
                 "id": id,
                 "content": {
                     "reply_tag": $(`#${id}_reply_tag`).text(),
-                    "replyer_name": $(`${id}_replyer_name`).val(),
+                    "replyer_name": $(`#${id}_replyer_name`).val(),
                     "reply": $(`#${id}_reply`).val()
                 }
             }
