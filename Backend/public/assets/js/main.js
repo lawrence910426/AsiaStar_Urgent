@@ -27,7 +27,7 @@ function gen(row) {
                         <td><textarea id="question" class="asia_disable" style="width: 100%;height: 150px;" placeholder="[Why is it so late?]" disabled="disabled">${row.question}</textarea>
                             <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary asia_disable" id="submit_question" type="button" disabled="disabled">發問</button></div>
                         </td>
-                        <td><label id="question_tag">${row.question_tag}</label></td>
+                        <td><label>${row.question_tag}</label></td>
                         <td><label id="name">???</label></td>
                         <td><label id="car_id">???</label></td>
                     </tr>
@@ -53,9 +53,9 @@ function gen(row) {
                         </td>
                         <td><label id="${row.id}_reply_tag" class="reply_tag">???</label></td>
                         <td>
-                            <div class="form-check"><input id="${row.id}_solve" type="checkbox" class="form-check-input weida_disable solve" self_id="${row.id}" /><label class="form-check-label" for="${row.id}_solve">是否解決</label></div>
+                            <div class="form-check"><input id="${row.id}_solve" type="checkbox" class="form-check-input weida_disable solve" self_id="${row.id}"/><label class="form-check-label" for="${row.id}_solve">是否解決</label></div>
                         </td>
-                        <td><label class="solve_tag" id="${row.id}_solve_tag">???</label></td>
+                        <td><label class="solve_tag" id="${row.id}_solve_tag">${row.solve_tag}</label></td>
                     </tr>
                 </tbody>
             </table>
@@ -112,6 +112,7 @@ $(document).ready(function() {
     $.post( "/get_questions", function(data) {
         for(var i in data) {
             $("#history").append(gen(data[i]))
+            $(`${row.id}_solve`).prop('checked', data[i].solve == 1);
         }
         hook();
     });
