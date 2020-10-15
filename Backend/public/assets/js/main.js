@@ -140,13 +140,13 @@ $(document).ready(function() {
             var submit = {
                 "id": id,
                 "content": {
-                    "question_tag": $(`#${id}_reply_tag`).text(),
+                    "reply_tag": $(`#${id}_reply_tag`).text(),
                     "replyer_name": $(`${id}_replyer_name`).val(),
                     "reply": $(`#${id}_reply`).val()
                 }
             }
-            $.post("/answer_problem", submit, function(data) {
-                //window.location.reload();
+            $.post("/answer_problem", JSON.stringify(submit), function(data) {
+                window.location.reload();
             });
         })
         
@@ -159,8 +159,8 @@ $(document).ready(function() {
                     "solve": $(`#${id}_solve`).prop("checked") ? 1 : 0 
                 }
             }
-            $.post("/solve_problem", submit, function(data) {
-                //window.location.reload();
+            $.post("/solve_problem", JSON.stringify(submit), function(data) {
+                window.location.reload();
             });
         })
     }
