@@ -27,13 +27,13 @@ function gen(row) {
                         <td>維達</td>
                         <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[吳邦寧]" disabled="disabled">${row.questioner_name}</textarea></td>
                         <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5487580]" disabled="disabled">${row.recipt_id}</textarea></td>
-                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5809487]" disabled="disabled">${row.product_id}</textarea><label id="product_name" style="width: 100%;">品名：???</label></td>
+                        <td><textarea class="asia_disable" style="height: 30px;width: 100%;" placeholder="[5809487]" disabled="disabled">${row.product_id}</textarea><label id="product_name" style="width: 100%;">品名：${row.product_name}</label></td>
                         <td><textarea id="question" class="asia_disable" style="width: 100%;height: 150px;" placeholder="[Why is it so late?]" disabled="disabled">${row.question}</textarea>
                             <div class="d-xl-flex justify-content-xl-end"><button class="btn btn-primary asia_disable" id="submit_question" type="button" disabled="disabled">發問</button></div>
                         </td>
                         <td><label>${row.question_tag}</label></td>
-                        <td><label id="name">???</label></td>
-                        <td><label id="car_id">???</label></td>
+                        <td><label id="name">${row.name}</label></td>
+                        <td><label id="car_id">${row.car_id}</label></td>
                     </tr>
                 </tbody>
             </table>
@@ -99,7 +99,7 @@ $(document).ready(function() {
             submit[fields[item]] = $(`#${fields[item]}`).val()
         }
         $.post( "/query_car", submit, function(data) {
-            if(data.length() == 0) {
+            if(data.length == 0) {
                 $('#name').val("???")
                 $('#car_id').val("???")
                 $("#product_name").val(`品名：?`)
@@ -115,8 +115,19 @@ $(document).ready(function() {
     
     $.post( "/get_questions", function(data) {
         for(var i in data) {
-            $("#history").append(gen(data[i]))
-            $(`#${data[i].id}_solve`).prop('checked', data[i].solve);
+            $.post( "/query_car", submit, function(ret) {
+                if(ret.length == 0) {
+                    data[i]["name"] = "???"
+                    data[i]["car_id"] = "???"
+                    data[i]["product_name"] = "?"
+                } else {
+                    data[i]["name"] = ret[0].name
+                    data[i]["car_id"] = ret[0].car_id
+                    data[i]["product_name"] = ret[0].product_name
+                }
+                $("#history").append(gen(data[i]))
+                $(`#${data[i].id}_solve`).prop('checked', data[i].solve);
+            });
         }
         hook();
     });
