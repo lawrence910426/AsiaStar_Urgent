@@ -1,4 +1,4 @@
-module.exports = ((Sequelize, Model, DataTypes, sequelize, option = { force: false }) => {
+module.exports = ((Sequelize, Model, DataTypes, sequelize, option = { force: true }) => {
     class car extends Model { }
     car.init({
         car_id: { type: Sequelize.INTEGER },
@@ -12,10 +12,10 @@ module.exports = ((Sequelize, Model, DataTypes, sequelize, option = { force: fal
         recipt_id: { type: Sequelize.INTEGER },
         product_id: { type: Sequelize.INTEGER },
         questioner_name: { type: DataTypes.STRING },
-        question: { type: DataTypes.STRING },
+        question: { type: DataTypes.TEXT },
         question_tag: { type: 'TIMESTAMP', defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
         replyer_name: { type: DataTypes.STRING }, 
-        reply: { type: DataTypes.STRING },
+        reply: { type: DataTypes.TEXT },
         reply_tag: { type: 'TIMESTAMP', defaultValue: Sequelize.literal('CURRENT_TIMESTAMP') },
     }, { sequelize });
     

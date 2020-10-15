@@ -2,14 +2,14 @@ var express = require('express');
 var router = express.Router();
 
 const { Sequelize, Model, DataTypes, Op } = require('sequelize');
-/* const sequelize = new Sequelize('AsiaStarUrgent', 'root', '2rjurrru', {
+const sequelize = new Sequelize('AsiaStarUrgent', 'db', '2rjurrru', {
     host: 'localhost', dialect: 'mysql',
-    define: { charset: 'utf8', dialectOptions: { collate: 'utf8_unicode_ci' }, timestamps: false },
+    define: { charset: 'utf8', dialectOptions: { collate: 'utf8_general_ci' }, timestamps: false },
     pool: 1
 });
 const db_model = require('./db_model.js');
-const db = db_model(Sequelize, Model, DataTypes, sequelize, { force: false });
-*/
+const db = db_model(Sequelize, Model, DataTypes, sequelize);
+
 router.post('/submit_problem', function(req, res, next) {
       
 });
