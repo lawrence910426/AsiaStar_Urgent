@@ -70,9 +70,12 @@ function gen(row) {
 }
 
 $(document).ready(function() {
-    $("input[type=file]").change(function(){
-        alert($(this).val());
-    }); 
+    $('input[type="file"]').fileupload({
+        dataType: 'json',
+        done: function (e, data) {
+            window.location.reload();
+        }
+    });
     
     $("#submit_question").click(function() {
         var fields = [
