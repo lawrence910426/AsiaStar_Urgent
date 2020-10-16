@@ -99,7 +99,7 @@ $(document).ready(function() {
         var fields = ["recipt_id", "product_id"]
         var submit = {}
         for(var item in fields) {
-            if($(`#${fields[item]}`).val() != undefined) 
+            if($(`#${fields[item]}`).val() != "") 
                 submit[fields[item]] = $(`#${fields[item]}`).val()
         }
         $.post( "/query_car", submit, function(data) {
