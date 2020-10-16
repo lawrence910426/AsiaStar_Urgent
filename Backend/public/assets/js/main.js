@@ -136,7 +136,7 @@ $(document).ready(function() {
                     data[j]["product_name"] = ret[0].product_name
                 }
                 $("#history").append(gen(data[j]))
-                $(`#${data[i].id}_solve`).prop('checked', data[j].solve);
+                $(`#${data[j].id}_solve`).prop('checked', data[j].solve);
                 hook();
             });
         }
