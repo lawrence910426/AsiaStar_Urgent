@@ -123,19 +123,20 @@ $(document).ready(function() {
             var submit = {}
             for(var item in fields) 
                 submit[fields[item]] = data[i][fields[item]]
-        
+            
+            const j = i;
             $.post( "/query_car", submit, function(ret) {
                 if(ret.length == 0) {
-                    data[i]["name"] = "???"
-                    data[i]["car_id"] = "???"
-                    data[i]["product_name"] = "?"
+                    data[j]["name"] = "???"
+                    data[j]["car_id"] = "???"
+                    data[j]["product_name"] = "?"
                 } else {
-                    data[i]["name"] = ret[0].name
-                    data[i]["car_id"] = ret[0].car_id
-                    data[i]["product_name"] = ret[0].product_name
+                    data[j]["name"] = ret[0].name
+                    data[j]["car_id"] = ret[0].car_id
+                    data[j]["product_name"] = ret[0].product_name
                 }
-                $("#history").append(gen(data[i]))
-                $(`#${data[i].id}_solve`).prop('checked', data[i].solve);
+                $("#history").append(gen(data[j]))
+                $(`#${data[i].id}_solve`).prop('checked', data[j].solve);
                 hook();
             });
         }
