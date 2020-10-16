@@ -71,6 +71,7 @@ function gen(row) {
 
 $(document).ready(function() {
     $('input[type="file"]').fileupload({
+        dataType: 'json',
         done: function (e, data) {
             window.location.reload();
         }
@@ -98,7 +99,8 @@ $(document).ready(function() {
         var fields = ["recipt_id", "product_id"]
         var submit = {}
         for(var item in fields) {
-            submit[fields[item]] = $(`#${fields[item]}`).val()
+            if($(`#${fields[item]}`).val() != undefined) 
+                submit[fields[item]] = $(`#${fields[item]}`).val()
         }
         $.post( "/query_car", submit, function(data) {
             if(data.length == 0) {
