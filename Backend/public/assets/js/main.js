@@ -117,7 +117,7 @@ $(document).ready(function() {
     })
     
     
-    $.post( "/get_questions", function(data) {
+    $.post( "/get_questions", async function(data) {
         for(var i in data) {
             var fields = ["recipt_id", "product_id"]
             var submit = {}
@@ -125,20 +125,28 @@ $(document).ready(function() {
                 submit[fields[item]] = data[i][fields[item]]
             
             const j = i;
-            $.post( "/query_car", submit, function(ret) {
-                if(ret.length == 0) {
-                    data[j]["name"] = "???"
-                    data[j]["car_id"] = "???"
-                    data[j]["product_name"] = "?"
-                } else {
-                    data[j]["name"] = ret[0].name
-                    data[j]["car_id"] = ret[0].car_id
-                    data[j]["product_name"] = ret[0].product_name
-                }
-                $("#history").append(gen(data[j]))
-                $(`#${data[j].id}_solve`).prop('checked', data[j].solve);
-                hook();
-            });
+            
+            function f() {
+                return new Promise((resolve) => {
+                    $.post( "/query_car", submit, function(ret) {
+                        if(ret.length == 0) {
+                            data[j]["name"] = "???"
+                            data[j]["car_id"] = "???"
+                            data[j]["product_name"] = "?"
+                        } else {
+                            data[j]["name"] = ret[0].name
+                            data[j]["car_id"] = ret[0].car_id
+                            data[j]["product_name"] = ret[0].product_name
+                        }
+                        $("#history").append(gen(data[j]))
+                        $(`#${data[j].id}_solve`).prop('checked', data[j].solve);
+                        hook();
+                        resolve();
+                    });
+                })
+            }
+            
+            await f();
         }
     });
     
