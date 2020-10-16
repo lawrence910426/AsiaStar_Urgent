@@ -132,9 +132,9 @@ $(document).ready(function() {
                 }
                 $("#history").append(gen(data[i]))
                 $(`#${data[i].id}_solve`).prop('checked', data[i].solve);
+                hook();
             });
         }
-        hook();
     });
     
     function hook() {
