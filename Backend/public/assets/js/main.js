@@ -71,7 +71,6 @@ function gen(row) {
 
 $(document).ready(function() {
     $('input[type="file"]').fileupload({
-        dataType: 'json',
         done: function (e, data) {
             window.location.reload();
         }
