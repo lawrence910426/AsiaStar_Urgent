@@ -72,7 +72,8 @@ router.post('/get_questions', async function(req, res) {
 	const ans = await db.question.findAll({
 		order: [
 			['id', 'DESC']
-		]
+		],
+		where: req.body
 	});
 	res.send(ans);
 });
