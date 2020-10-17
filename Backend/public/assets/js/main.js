@@ -192,7 +192,7 @@ function load() {
                 }
             }
             $.post("/solve_problem", { "content": JSON.stringify(submit) }, function(data) {
-                
+                load();
             });
         })
     }
