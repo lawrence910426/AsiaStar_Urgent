@@ -69,10 +69,11 @@ function gen(row) {
 </div></div>`
 }
 
-$(document).ready(function() {
+function load() {
     $('input[type="file"]').fileupload({
         dataType: 'json',
         done: function (e, data) {
+            alert("完成上傳")
             window.location.reload();
         }
     });
@@ -117,7 +118,7 @@ $(document).ready(function() {
     })
     
     
-    $.post( "/get_questions", async function(data) {
+    $.post( "/get_questions", { "solve": 0 }, async function(data) {
         for(var i in data) {
             var fields = ["recipt_id", "product_id"]
             var submit = {}
@@ -177,7 +178,7 @@ $(document).ready(function() {
                 }
             }
             $.post("/answer_problem", { "content": JSON.stringify(submit) }, function(data) {
-                window.location.reload();
+                alert("完成回覆")
             });
         })
         
@@ -191,9 +192,11 @@ $(document).ready(function() {
                 }
             }
             $.post("/solve_problem", { "content": JSON.stringify(submit) }, function(data) {
-                window.location.reload();
+                
             });
         })
     }
     hook();
-})
+}
+
+$(document).ready(load)
