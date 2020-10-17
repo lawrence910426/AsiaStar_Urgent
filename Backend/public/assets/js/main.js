@@ -69,54 +69,54 @@ function gen(row) {
 </div></div>`
 }
 
-function load() {
-    $('input[type="file"]').fileupload({
-        dataType: 'json',
-        done: function (e, data) {
-            alert("完成上傳")
-            window.location.reload();
+$('input[type="file"]').fileupload({
+    dataType: 'json',
+    done: function (e, data) {
+        alert("完成上傳")
+        window.location.reload();
+    }
+});
+
+$("#submit_question").click(function() {
+    var fields = [
+        "questioner_name",
+        "recipt_id",
+        "product_id",
+        "question"
+    ]
+    var submit = {
+        "question_tag": $("#question_tag").text()
+    }
+    for(var item in fields) {
+        submit[fields[item]] = $(`#${fields[item]}`).val()
+    }
+    $.post( "/submit_problem", submit, function(data) {
+        window.location.reload();
+    });
+})
+
+$("#recipt_id, #product_id").keyup(function() {
+    var fields = ["recipt_id", "product_id"]
+    var submit = {}
+    for(var item in fields) {
+        if($(`#${fields[item]}`).val() != "") 
+            submit[fields[item]] = $(`#${fields[item]}`).val()
+    }
+    $.post( "/query_car", submit, function(data) {
+        if(data.length == 0) {
+            $('#name').text("???")
+            $('#car_id').text("???")
+            $("#product_name").text(`品名：?`)
+        } else {
+            $('#name').text(data[0].name)
+            $('#car_id').text(data[0].car_id)
+            $("#product_name").text(`品名：${data[0].product_name}`)
         }
     });
-    
-    $("#submit_question").click(function() {
-        var fields = [
-            "questioner_name",
-            "recipt_id",
-            "product_id",
-            "question"
-        ]
-        var submit = {
-            "question_tag": $("#question_tag").text()
-        }
-        for(var item in fields) {
-            submit[fields[item]] = $(`#${fields[item]}`).val()
-        }
-        $.post( "/submit_problem", submit, function(data) {
-            window.location.reload();
-        });
-    })
-    
-    $("#recipt_id, #product_id").keyup(function() {
-        var fields = ["recipt_id", "product_id"]
-        var submit = {}
-        for(var item in fields) {
-            if($(`#${fields[item]}`).val() != "") 
-                submit[fields[item]] = $(`#${fields[item]}`).val()
-        }
-        $.post( "/query_car", submit, function(data) {
-            if(data.length == 0) {
-                $('#name').text("???")
-                $('#car_id').text("???")
-                $("#product_name").text(`品名：?`)
-            } else {
-                $('#name').text(data[0].name)
-                $('#car_id').text(data[0].car_id)
-                $("#product_name").text(`品名：${data[0].product_name}`)
-            }
-        });
-        
-    })
-    
+})
+
+function load() {
+    $("#history").empty();
     
     $.post( "/get_questions", { "solve": 0 }, async function(data) {
         for(var i in data) {
